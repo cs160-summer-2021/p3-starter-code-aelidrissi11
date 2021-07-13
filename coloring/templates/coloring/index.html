@@ -16,15 +16,120 @@
 			display: flex;
 			flex-wrap: wrap;
 			position: relative;
+			margin-top: 1vh;
+		}
+		#reds {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
 			top: 0;
+			visibility: none;
+			left: 2vw;
+		}
+		#oranges {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#yellows {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#greens {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#blues {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#indigos {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#violets {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#browns {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
+		}
+		#grays {
+			width: 36vw;
+			height: 3.75vh;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: relative;
+			top: 0;
+			visibility: hidden;
+			left: 2vw;
 		}
 
+		#colors-box {
+			visibility: hidden;
+		}
+
+
+
 		.swatch {
-			width: 24px;
-			height: 24px;
-			-moz-border-radius: 12px;
-			-webkit-border-radius: 12px;
-			border-radius: 12px;
+			
+			border-radius: 100px; 
+			height:40px; 
+			width: 40px;
+		
 			margin: 3px;
 		}
 
@@ -54,7 +159,51 @@
 				options: [],
 				$container: $('#color-palette')
 			}
-
+			var cpreds = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cporanges = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpyellows = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpgreens = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpblues = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpindigos = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpviolets = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpbrowns = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
+			var cpgrays = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#reds')
+			}
 			function myCustomInteraction() {
 				var tool = new paper.Tool();
 
@@ -79,7 +228,7 @@
 						// add color to the color palette history
 					  	cp.history.push($(this).css("background-color"));
 					});
-					cp.$container.append($swatch);
+					cpreds.$container.append($swatch);
 				}
 			}
 
@@ -97,7 +246,7 @@
 
 			function init(custom){
 				paper.setup(canvas);
-				getColorsCreatePalette();
+				//getColorsCreatePalette();
 
 				paper.project.importSVG(mandala.filePath, function(item) {
 					mandala.item = item._children["design-freepik"];
@@ -111,9 +260,62 @@
 
 				});
 			}
-
+			function toggleColorsBox(){
+				let box = document.getElementById("colors-box");
+				if(box.style.visibility === "hidden") {
+					box.style.visibility = "visible";
+				} else {
+					box.style.visibility = "hidden";
+				}
+			}
+			function changeButtonText(color) {
+				let btn = document.getElementById("toggleColorsBoxButton");
+				btn.innerText = color;
+			}
 			// Set up the mandala interactivity.
 			init(true);
+			document.getElementById("toggleColorsBoxButton").addEventListener("click", toggleColorsBox, true);
+			document.getElementById("redButton").addEventListener("click", function() {
+				changeButtonText("Red");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("orangeButton").addEventListener("click", function() {
+				changeButtonText("Orange");
+				toggleColorsBox();
+			}, false);
+			
+			document.getElementById("yellowButton").addEventListener("click", function() {
+				changeButtonText("Yellow");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("greenButton").addEventListener("click", function() {
+				changeButtonText("Green");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("blueButton").addEventListener("click", function() {
+				changeButtonText("Blue");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("indigoButton").addEventListener("click", function() {
+				changeButtonText("Indigo");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("violetButton").addEventListener("click", function() {
+				changeButtonText("Violet");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("brownButton").addEventListener("click", function() {
+				changeButtonText("Brown");
+				toggleColorsBox();
+			}, false);
+			document.getElementById("grayButton").addEventListener("click", function() {
+				changeButtonText("Gray");
+				toggleColorsBox();
+			}, false);
+			
+			//reds
+			createColorPalette(["#620505", "#990000", "#D20000", "#F63737", "#FEAFAF", "#FF7777", "#FFCBCB"]);
+			//oranges
 		}
 	</script>
 	<!-- Bootstrap CSS -->
@@ -121,7 +323,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row" style="height: 80vh">
 			<div class="col-1">
 				<button style="border:none; background:none">
 					<img src="https://drive.google.com/uc?export=view&id=1HuRjyxs4-58evKpvQoV4GURqF7_c7oRc" style="width:50px; height:50px; border:none; background:none">
@@ -172,6 +374,74 @@
 			<br>
 			<hr style="color: lightgray">
 			<br>
+		</div>
+		<div class="row" style="height:10vh">
+			<div class="col-4">
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<br>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				</button>
+			</div>
+			<div class="col-1">
+				<button style="border:none; background: none; height: 40px; width: 30px; transform: rotate(90deg)">
+					<img src="https://drive.google.com/uc?export=view&id=1iNZcNNlKu1bkbT-vateSKxBHZzOucole" style="height: 80px; width: 95px; padding-right: 2vh">
+				</button>
+				
+			</div>
+			<div class="col-7">
+				<div id="colors-box" style="width:22vw; height:10vh; background-color: aliceblue; position: relative; top: -100px; float: right; left: -2.5vw"> 
+					<button id="redButton" style="border:none; background:none" >
+						Red
+					</button>
+					<button id="orangeButton" style="border:none; background:none; position: relative; left: 3vw">
+					    Orange
+					</button>
+					<button id="yellowButton" style="border:none; background:none; float: right">
+						Yellow
+					</button>
+					<button id="greenButton" style="border:none; background:none">
+						Green
+					</button>
+					<button id="blueButton" style="border:none; background:none; position: relative; left: 1.5vw" >
+						Blue
+					</button>
+					<button id="indigoButton" style="border:none; background:none; float: right">
+						Indigo
+					</button>
+					<button id="violetButton" style="border:none; background:none">
+						Violet
+					</button>
+					<button id="brownButton" style="border:none; background:none; position: relative; left: 1.7vw">
+						Brown
+					</button>
+					<button id="grayButton" style="border:none; background:none; float: right; left: -1.3vw; position: relative">
+						Gray
+					</button>
+				</div>
+				<div style="top:-50px">
+					<button id="toggleColorsBoxButton" style="border:black; background: none; margin-top: -50px; padding-left: 18.5vw; position: relative; top: -10vh;" >
+						Red
+					</button>
+				</div>
+				<div id="reds" style="padding-left: 2vw; top:-10vh">
+
+				</div>
+
+			</div>
+			
 		</div>
 
 	</div>
