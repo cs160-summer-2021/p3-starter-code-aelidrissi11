@@ -180,6 +180,22 @@
 			font-size: 40px !important;
 			text-decoration: underline !important;
 		}
+
+		.favoritesButton {
+			opacity: 100; 
+			width: 40px; 
+			height: 40px; 
+			border-radius: 200px
+
+		}
+		.favoritesInput {
+			opacity: 0; 
+			width: 40px; 
+			height: 40px; 
+			border-radius: 200px
+
+		}
+		
 	</style>
 
 	<script type="text/javascript" canvas="canvas">
@@ -200,46 +216,6 @@
 				$container: $('#color-palette')
 			}
 			var cpreds = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cporanges = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpyellows = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpgreens = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpblues = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpindigos = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpviolets = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpbrowns = {
-				history: ["#000000"], // black selected by default
-				options: [],
-				$container: $('#reds')
-			}
-			var cpgrays = {
 				history: ["#000000"], // black selected by default
 				options: [],
 				$container: $('#reds')
@@ -316,6 +292,21 @@
 					box.style.visibility = "hidden";
 				}
 			}
+			function togglePaletteSpectrum(color){
+				let palette = document.getElementById("palette");
+				let spectrum = document.getElementById("spectrum")
+				if(palette.style.visibility === "hidden") {
+					spectrum.style.visibility = "hidden";
+					palette.style.visibility= "visible";
+					
+				} else {
+					spectrum.style.visibility = "visible";
+					palette.style.visibility= "hidden";
+				}
+			}
+			function clearColorPalette() {
+				cpreds.$container.empty();
+			}
 			function changeButtonText(color) {
 				let btn = document.getElementById("toggleColorsBoxButton");
 				btn.innerText = color;
@@ -325,45 +316,128 @@
 			document.getElementById("toggleColorsBoxButton").addEventListener("click", toggleColorsBox, true);
 			document.getElementById("redButton").addEventListener("click", function() {
 				changeButtonText("Red");
+				clearColorPalette();
+				createColorPalette(reds);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("orangeButton").addEventListener("click", function() {
 				changeButtonText("Orange");
+				clearColorPalette();
+				createColorPalette(oranges);
 				toggleColorsBox();
 			}, false);
 			
 			document.getElementById("yellowButton").addEventListener("click", function() {
 				changeButtonText("Yellow");
+				clearColorPalette();
+				createColorPalette(yellows);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("greenButton").addEventListener("click", function() {
 				changeButtonText("Green");
+				clearColorPalette();
+				createColorPalette(greens);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("blueButton").addEventListener("click", function() {
 				changeButtonText("Blue");
+				clearColorPalette();
+				createColorPalette(blues);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("indigoButton").addEventListener("click", function() {
 				changeButtonText("Indigo");
+				clearColorPalette();
+				createColorPalette(indigos);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("violetButton").addEventListener("click", function() {
 				changeButtonText("Violet");
+				clearColorPalette();
+				createColorPalette(violets);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("brownButton").addEventListener("click", function() {
 				changeButtonText("Brown");
+				clearColorPalette();
+				createColorPalette(browns);
 				toggleColorsBox();
 			}, false);
 			document.getElementById("grayButton").addEventListener("click", function() {
 				changeButtonText("Gray");
+				clearColorPalette();
+				createColorPalette(grays);
 				toggleColorsBox();
 			}, false);
-			
-			//reds
-			createColorPalette(["#620505", "#990000", "#D20000", "#F63737", "#FEAFAF", "#FF7777", "#FFCBCB"]);
-			//oranges
+			document.getElementById("swapper").addEventListener("click", function() {
+				togglePaletteSpectrum();
+			}, false);
+			reds = ["#620505", "#990000", "#D20000", "#F63737", "#FEAFAF", "#FF7777", "#FFCBCB"];
+			oranges = ["#C16107", "#CE6123", "#EE5600", "#FF7A00", "#FF9B3F", "#FFA573", "#FFC8A0"];
+			yellows = ["#C09600", "#E4B303", "#F0BB00", "#F4EF65", "#FFE600", "#FFF3B7", "#FFF500"];
+			greens = ["#09BA25", "#109B04", "#14FF00", "#22840A", "#4FCF4C", "#69E484", "#98EEBA"];
+			blues = ["#004368", "#00728B", "#0085FF", "#00C2FF", "#2CD9FF", "#4A819F", "#A5DEFF"];
+			indigos = ["#0010A4", "#013380", "#OC24FF", "#2558A4", "#3C6ADF", "#5A51BD", "#878FDC"];
+			violets = ["#380678", "#4613B1", "#5E3B8B", "#6100FF", "#7C4BE4", "#A564D8", "#C896E8"];
+			browns = ["#561E05", "#683609", "#764A21", "#883507", "#8A5334", "#8A7234", "#AD8B62"];
+			grays = ["#000000", "#302F2F", "#616161", "#818181", "#A1A1A1", "#C8C5C5", "#D8D9D9"];
+			createColorPalette(reds);
+			let favoritesBtn1 = document.getElementById("favoritesButton1");
+			let favoritesBtnWrapper1 = document.getElementById("favoritesBtn1");
+			favoritesBtn1.onchange = function() {
+				favoritesBtnWrapper1.style.background = favoritesBtn1.value;
+				cp.history.push(favoritesBtn1.value);
+			}
+			favoritesBtnWrapper1.style.background = favoritesBtn1.value;
+			let favoritesBtn2 = document.getElementById("favoritesButton2");
+			let favoritesBtnWrapper2 = document.getElementById("favoritesBtn2");
+			favoritesBtn2.onchange = function() {
+				favoritesBtnWrapper2.style.background = favoritesBtn2.value;
+				cp.history.push(favoritesBtn2.value);
+			}
+			favoritesBtnWrapper2.style.background = favoritesBtn2.value;
+			let favoritesBtn3 = document.getElementById("favoritesButton3");
+			let favoritesBtnWrapper3 = document.getElementById("favoritesBtn3");
+			favoritesBtn3.onchange = function() {
+				favoritesBtnWrapper3.style.background = favoritesBtn3.value;
+				cp.history.push(favoritesBtn3.value);
+			}
+			favoritesBtnWrapper3.style.background = favoritesBtn3.value;
+			let favoritesBtn4 = document.getElementById("favoritesButton4");
+			let favoritesBtnWrapper4 = document.getElementById("favoritesBtn4");
+			favoritesBtn4.onchange = function() {
+				favoritesBtnWrapper4.style.background = favoritesBtn4.value;
+				cp.history.push(favoritesBtn4.value);
+			}
+			favoritesBtnWrapper4.style.background = favoritesBtn4.value;
+			let favoritesBtn5 = document.getElementById("favoritesButton5");
+			let favoritesBtnWrapper5 = document.getElementById("favoritesBtn5");
+			favoritesBtn5.onchange = function() {
+				favoritesBtnWrapper5.style.background = favoritesBtn5.value;
+				cp.history.push(favoritesBtn5.value);
+			}
+			favoritesBtnWrapper5.style.background = favoritesBtn5.value;
+			let favoritesBtn6 = document.getElementById("favoritesButton6");
+			let favoritesBtnWrapper6 = document.getElementById("favoritesBtn6");
+			favoritesBtn6.onchange = function() {
+				favoritesBtnWrapper6.style.background = favoritesBtn6.value;
+				cp.history.push(favoritesBtn6.value);
+			}
+			favoritesBtnWrapper6.style.background = favoritesBtn6.value;
+			let favoritesBtn7 = document.getElementById("favoritesButton7");
+			let favoritesBtnWrapper7 = document.getElementById("favoritesBtn7");
+			favoritesBtn7.onchange = function() {
+				favoritesBtnWrapper7.style.background = favoritesBtn7.value;
+				cp.history.push(favoritesBtn7.value);
+			}
+			favoritesBtnWrapper7.style.background = favoritesBtn7.value;
+			let favoritesBtn8 = document.getElementById("favoritesButton8");
+			let favoritesBtnWrapper8 = document.getElementById("favoritesBtn8");
+			favoritesBtn8.onchange = function() {
+				favoritesBtnWrapper8.style.background = favoritesBtn8.value;
+				cp.history.push(favoritesBtn8.value);
+			}
+			favoritesBtnWrapper8.style.background = favoritesBtn8.value;
 		}
 	</script>
 	<!-- Bootstrap CSS -->
@@ -454,26 +528,36 @@
 		</div>
 		<div class="row" style="height:10vh">
 			<div class="col-4">
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn1">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton1">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn2">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton2">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn3">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton3">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn4">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton4">
 				</button>
-				<br>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn5">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton5">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn6">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton6">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn7">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton7">
 				</button>
-				<button style="border:none; background:purple; border-radius: 100px; height:40px; width: 40px">
+				<button class="favoritesButton" id="favoritesBtn8">
+					<input type="color" class="favoritesInput" value="#ffffff" id="favoritesButton8">
 				</button>
+				
+
+				
 			</div>
 			<div class="col-1">
-				<button style="border:none; background: none; height: 40px; width: 30px; transform: rotate(90deg)">
+				<button id="swapper" style="border:none; background: none; height: 40px; width: 30px; transform: rotate(90deg)">
 					<img src="https://drive.google.com/uc?export=view&id=1iNZcNNlKu1bkbT-vateSKxBHZzOucole" style="height: 80px; width: 95px; padding-right: 2vh">
 				</button>
 				
@@ -508,15 +592,22 @@
 						Gray
 					</button>
 				</div>
-				<div style="top:-50px">
+				<div id="palette" style="visibility: visible">
+					<div style="top:-50px">
 					<button id="toggleColorsBoxButton" style="border:black; background: none; margin-top: -50px; padding-left: 18.5vw; position: relative; top: -10vh;" >
 						Red
 					</button>
+					<div id="reds" style="padding-left: 2vw; top:-10vh"></div>
 				</div>
-				<div id="reds" style="padding-left: 2vw; top:-10vh">
-
+				<div id="spectrum" style="visibility: hidden; position:relative; top: -200px">
+					<img src="https://drive.google.com/uc?export=view&id=1CM880zm5sLq3ger5tjQFN6yY_4tDjZlJ">
 				</div>
-
+				
+					
+				</div>
+				</div>
+				
+				
 			</div>
 			
 		</div>
